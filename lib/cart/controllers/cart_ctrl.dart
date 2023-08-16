@@ -1,8 +1,6 @@
 import '../../import.dart';
-import '../home.dart';
 
-class HomeCtrl extends GetxController{
-  List<BannerModel> banners = <BannerModel>[].obs;
+class CartCtrl extends GetxController{
   List<ProductModel> products = <ProductModel>[].obs;
 
   RxBool isLoading = false.obs;
@@ -10,31 +8,18 @@ class HomeCtrl extends GetxController{
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
 
-    loadLocalData();
-    
     loadFirebaseData();
-  }
-
-  void loadLocalData() async {
-    dynamic returned = json.decode(await rootBundle.loadString('assets/data/api_banner.json'));
-    
-    appDebugLog(returned);
   }
 
   void loadFirebaseData() async {
     isLoading.value = true;
 
     try{
-      final List<Map<String, dynamic>> bannerList = await loadFirebaseDataCollection("banners");
-      banners = BannerModel.bannerList(bannerList);
-
       final List<Map<String, dynamic>> productsList = await loadFirebaseDataCollection("products");
       products = ProductModel.productList(productsList);
 
-      appDebugLog("banners ${banners}");
       appDebugLog("products ${products}");
 
       await Future.delayed(Duration(seconds: 2));
@@ -46,8 +31,4 @@ class HomeCtrl extends GetxController{
       isError.value = true;
     }   
   }
-
-  
-
 }
-

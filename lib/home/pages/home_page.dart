@@ -66,9 +66,10 @@ class HomePage extends StatelessWidget {
           appBar: AppBar(title: Text("Home"), actions: [
             IconButton(
                 onPressed: () {
-                  // Get.to(CartScreen(), binding: BindingsBuilder(() {
-                  //   Get.put(CartCtrl());
-                  // }));
+                  Get.to(CartPage(), binding: BindingsBuilder(() {
+                    //Get.put(CartCtrl());
+                    Get.lazyPut(()=>CartCtrl());
+                  }));
                 },
                 icon: Icon(Icons.shopping_cart_outlined)),
             IconButton(onPressed: signOut, icon: Icon(Icons.logout))
@@ -79,59 +80,66 @@ class HomePage extends StatelessWidget {
           Center(child: CircularProgressIndicator())
           : _homeCtrl.isError.value ? 
           ErrorReloadPageWidget(action: _homeCtrl.loadFirebaseData)
-          : SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: deviceWidth * 0.05),
-                  child: WInputTextWidget(
-                    TextEditingController(),
-                    hintText: "Search Product By",
-                    iconAfter: Icons.search,
-                  ),
-                ),
-                SizedBox(height: 16),
-                BannerWidget(banners: _homeCtrl.banners),
-                SizedBox(height: 16),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: deviceWidth * 0.05),
+          : Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: deviceWidth * 0.05),
+                child: WInputTextWidget(
+                  TextEditingController(),
+                  hintText: "Search Product By",
+                  iconAfter: Icons.search,
+                ), 
+              ),
+              Expanded(
+                child: SingleChildScrollView(
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      heading("Categories", () {
-                        // Get.to(CartScreen(), binding: BindingsBuilder(() {
-                        //   Get.put(CartCtrl());
-                        // }));
-                      }),
+                      
                       SizedBox(height: 16),
-                      Row(
-                        children: [
-                          Expanded(flex: 1, child: categoryWidget("Foods")),
-                          Expanded(flex: 1, child: categoryWidget("Gift")),
-                          Expanded(flex: 1, child: categoryWidget("Fashion ")),
-                          Expanded(flex: 1, child: categoryWidget("Gadget")),
-                          Expanded(
-                            flex: 1,
-                            child: IconButton(onPressed: 
-                            () {}, icon: Icon(Icons.arrow_forward))
-                          )
-                        ],
-                      ),
+                      BannerWidget(banners: _homeCtrl.banners),
                       SizedBox(height: 16),
-                      heading("Feature products", () {
-                        // Get.to(CartScreen(), binding: BindingsBuilder(() {
-                        //   Get.put(CartCtrl());
-                        // }));
-                      }),
-                      SizedBox(height: 8),
-                      ProductWidget(products: _homeCtrl.products),
-                      SizedBox(height: 16),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: deviceWidth * 0.05),
+                        child: Column(
+                          children: [
+                            heading("Categories", () {
+                              // Get.to(CartScreen(), binding: BindingsBuilder(() {
+                              //   Get.put(CartCtrl());
+                              // }));
+                            }),
+                            SizedBox(height: 16),
+                            Row(
+                              children: [
+                                Expanded(flex: 1, child: categoryWidget("Foods")),
+                                Expanded(flex: 1, child: categoryWidget("Gift")),
+                                Expanded(flex: 1, child: categoryWidget("Fashion ")),
+                                Expanded(flex: 1, child: categoryWidget("Gadget")),
+                                Expanded(
+                                  flex: 1,
+                                  child: IconButton(onPressed: 
+                                  () {}, icon: Icon(Icons.arrow_forward))
+                                )
+                              ],
+                            ),
+                            SizedBox(height: 16),
+                            heading("Feature products", () {
+                              // Get.to(CartScreen(), binding: BindingsBuilder(() {
+                              //   Get.put(CartCtrl());
+                              // }));
+                            }),
+                            SizedBox(height: 8),
+                            ProductWidget(products: _homeCtrl.products),
+                            SizedBox(height: 16),
+                          ],
+                        ),
+                      )
+                      
                     ],
                   ),
-                )
-                
-              ],
-            ),
+                ),
+              ),
+            ],
           ),
           )),
     );
@@ -141,60 +149,74 @@ class HomePage extends StatelessWidget {
 class BannerWidget extends StatelessWidget {
   final List<BannerModel> banners;
 
-  final ScrollController _scrollController = ScrollController();
-
   BannerWidget({required this.banners});
   
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return 
-    // CarouselSlider(
-    //     options: CarouselOptions(
-    //       height: 180.0,
-    //       enableInfiniteScroll: false,
-    //       viewportFraction: 0.9),
-    //     items: banners.map((banner) {
-    //       return Builder(
-    //         builder: (BuildContext context) {
-    //           return Container(
-    //             width: MediaQuery.of(context).size.width,
-    //             padding: EdgeInsets.only(right: 16),
-    //             child: ClipRRect(
-    //               borderRadius: BorderRadius.circular(10),
-    //               child: Image.network(
-    //                     banner.link,
-    //                     fit: BoxFit.cover, // This ensures the image covers the entire area
-    //               ),
-    //             )
-    //           );
-    //         },
-    //       );
-    //     }).toList(),
-    //   );
+    return CarouselSlider(
+        options: CarouselOptions(
+          height: 180.0,
+          enableInfiniteScroll: false,
+          viewportFraction: 0.9,
+          enlargeCenterPage: false,//large->small
+          disableCenter: true,
+        ),
+        items: banners.map((banner) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.only(right: 18),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                        banner.link,
+                        fit: BoxFit.cover, // This ensures the image covers the entire area
+                  ),
+                )
+              );
+            },
+          );
+        }).toList(),
+      );
       
       // Do not use 
-      Container(
-        height: 180,
-        child: ListView.builder(
-          controller: _scrollController,
-          scrollDirection: Axis.horizontal,
-          itemCount: banners.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.only(right: 16),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10.0), // Adjust the radius as needed
-                child: Image.network(
-                  width: deviceWidth * 0.8,
-                  banners[index].link,
-                  fit: BoxFit.cover, // This ensures the image covers the entire area
-                ),
-              ),
-            );
-          },
-        ),
-      );
+      // NotificationListener<ScrollNotification>(
+      //   onNotification: (notification) {
+      //     if (notification is ScrollEndNotification && notification.metrics.axis == Axis.horizontal) {
+      //       scrollToNextImage();
+      //     }
+      //     return false;
+      //   },
+      //   child: ListView.builder(
+      //     controller: _scrollController,
+      //     scrollDirection: Axis.horizontal,
+      //     itemCount: banners.length,
+      //     itemBuilder: (context, index) {
+      //       return Padding(
+      //         padding: EdgeInsets.only(right: 16),
+      //         child: ClipRRect(
+      //           borderRadius: BorderRadius.circular(10.0),
+      //           child: GestureDetector(
+      //             onTap: (){
+      //               _scrollController.animateTo(
+      //                 (index * (deviceWidth * 0.8 + 16)) +
+      //                 (deviceWidth * 0.8 + 16 / 2) - (MediaQuery.of(context).size.width / 2),
+      //                 duration: Duration(milliseconds: 500),
+      //                 curve: Curves.easeInOut,
+      //               );
+      //             },
+      //             child: Image.network(
+      //               width: deviceWidth * 0.8,
+      //               banners[index].link,
+      //               fit: BoxFit.cover,
+      //             ),
+      //           ),
+      //         ),
+      //       );
+      //     },
+      //   ),
+      // );
   }
 }
 
