@@ -37,3 +37,13 @@ class CartPage extends StatelessWidget {
     );
   }
 }
+
+class CartItemWidget extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Expanded(
+      child: Row()
+    );
+  }
+}
