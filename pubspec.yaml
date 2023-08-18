@@ -16,6 +16,9 @@ dependencies:
   intl: ^0.17.0
   carousel_slider: ^4.2.1
 
+  # Location
+  geolocator: ^9.0.2
+
   # Firebase Auth
   firebase_core: ^2.15.0
   firebase_auth: ^4.7.2
@@ -31,7 +34,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/data/
+    - assets/data/carts/
+    - assets/data/products/
     - assets/images/
 
   fonts:

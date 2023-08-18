@@ -6,11 +6,12 @@ enum ImageType { asset, network, lottieAsset, lottieNetwork }
 
 class WImageWidget extends StatelessWidget {
   const WImageWidget(
-      {required this.imageType, required this.image, this.height, super.key});
+      {required this.imageType, required this.image, this.height, this.boxfit, super.key});
 
   final ImageType imageType;
   final String image;
   final double? height;
+  final BoxFit? boxfit;
 
   @override
   Widget build(BuildContext context) {
@@ -18,25 +19,25 @@ class WImageWidget extends StatelessWidget {
 
     switch (imageType) {
       case ImageType.asset:
-        image = Image.asset(this.image, height: height,
+        image = Image.asset(this.image, height: height, fit: boxfit,
             errorBuilder: (context, error, stackTrace) {
          return Image.asset('assets/images/no_image.png');
         });
         break;
       case ImageType.network:
-        image = Image.network(this.image, height: height,
+        image = Image.network(this.image, height: height, fit: boxfit,
             errorBuilder: (context, error, stackTrace) {
           return Image.asset('assets/images/no_image.png');
         });
         break;
       case ImageType.lottieAsset:
-        image = Lottie.asset(this.image, height: height,
+        image = Lottie.asset(this.image, height: height, fit: boxfit,
             errorBuilder: (context, error, stackTrace) {
           return Lottie.asset('assets/lotties/no_image.json');
         });
         break;
       case ImageType.lottieNetwork:
-        image = Lottie.network(this.image, height: height,
+        image = Lottie.network(this.image, height: height, fit: boxfit,
             errorBuilder: (context, error, stackTrace) {
           return Image.asset('assets/lotties/no_image.json');
         });

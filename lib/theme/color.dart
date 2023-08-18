@@ -2,7 +2,7 @@
 import '../import.dart';
 
 // Scaffold Colors
-const Color bg1 = Color(0xFFFAFAFA);
+const Color bg1 = Color(0xFFDEE9EE);
 
 // Primary Colors
 const Color primary1 = Color(0xFF3669C9);

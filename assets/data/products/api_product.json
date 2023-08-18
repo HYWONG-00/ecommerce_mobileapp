@@ -1,0 +1,77 @@
+{
+    "data" : {
+        "id" : 23,
+        "title" : "Steak",
+        "description" : "Hot & Spicy",
+        "image" : "https://images.ctfassets.net/u128j5s4q9gv/2TPldiWgEnzZYoRyhTmajA/f2c5b4471ce41d7db8e40da0c96ea03b/western_food.png",
+        "price" : 10.0,
+        "rating" : 23,
+        "choices" : [
+            {
+                "id" : 123,
+                "title" : "Choice of Ice Level (A)",
+                "type" : 1,
+                "max_select" : 0,
+                "options" : [
+                    {
+                        "id" : 1,
+                        "title" : "Normal Ice",
+                        "price" : 0.00
+                    },
+                    {
+                        "id" : 2,
+                        "title" : "Less Ice",
+                        "price" : 0.00
+                    },
+                    {
+                        "id" : 3,
+                        "title" : "Extra Ice",
+                        "price" : 0.00
+                    }
+                ]
+            },
+            {
+                "id" : 124,
+                "title" : "Choice of Sugar Level (A)",
+                "type" : 1,
+                "max_select" : 0,
+                "options" : [
+                    {
+                        "id" : 1,
+                        "title" : "Normal Sugar",
+                        "price" : 0.00
+                    },
+                    {
+                        "id" : 2,
+                        "title" : "Less Sugar",
+                        "price" : 0.00
+                    },
+                    {
+                        "id" : 3,
+                        "title" : "Extra Sugar",
+                        "price" : 0.00
+                    }
+                ]
+            },
+            {
+                "id" : 125,
+                "title" : "Add-On Toppings (A)",
+                "type" : 2,
+                "max_select" : 2,
+                "options" : [
+                    {
+                        "id" : 1,
+                        "title" : "Pearl",
+                        "price" : 1.50
+                    },
+                    {
+                        "id" : 2,
+                        "title" : "Grass Jelly",
+                        "price" : 1.50
+                    }
+                ]
+            }
+        ]
+    },
+    "error": {}
+}

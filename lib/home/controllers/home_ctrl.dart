@@ -13,7 +13,7 @@ class HomeCtrl extends GetxController{
     // TODO: implement onInit
     super.onInit();
 
-    loadLocalData();
+    //loadLocalData();
     
     loadFirebaseData();
   }
@@ -24,7 +24,7 @@ class HomeCtrl extends GetxController{
     appDebugLog(returned);
   }
 
-  void loadFirebaseData() async {
+  void loadFirebaseData({String? filter}) async {
     isLoading.value = true;
 
     try{
@@ -42,12 +42,13 @@ class HomeCtrl extends GetxController{
       isLoading.value = false;
 
     } catch (e) {
+      appErrorLog("Error occurs: $e");
       isLoading.value = false;
       isError.value = true;
     }   
   }
 
-  
+
 
 }
 

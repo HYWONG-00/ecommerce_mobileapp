@@ -22,6 +22,7 @@ class _WidgetTreeState extends State<WidgetTree>{
           appDebugLog("Logger is working! ${snapshot}");
           
           Get.put(HomeCtrl());
+          Get.put(CartCtrl());
           return HomePage();
         } else{
           appErrorLog(snapshot);

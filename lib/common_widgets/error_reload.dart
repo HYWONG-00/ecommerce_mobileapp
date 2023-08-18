@@ -1,9 +1,9 @@
 import '../../import.dart';
 
-class ErrorReloadPageWidget extends StatelessWidget{
+class ErrorReloadWidget extends StatelessWidget{
   final VoidCallback action;
-  
-  ErrorReloadPageWidget({super.key, required this.action});
+  final double? height, width;
+  ErrorReloadWidget({super.key, required this.action, this.height, this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -11,8 +11,8 @@ class ErrorReloadPageWidget extends StatelessWidget{
     return InkWell(
       onTap: () => action(),
       child: Ink(
-                height: deviceHeight,
-                width: deviceWidth,
+                height: height ?? deviceHeight,
+                width: width ?? deviceWidth,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,

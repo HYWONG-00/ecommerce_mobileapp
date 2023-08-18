@@ -2,6 +2,9 @@ import 'package:logger/logger.dart';
 
 Logger logger = Logger(
   printer: PrettyPrinter(
+      levelColors: {
+        Level.info: AnsiColor.fg(42)
+      },
       // methodCount: 2, // Number of method calls to be displayed
       // errorMethodCount: 8, // Number of method calls if stacktrace is provided
       // lineLength: 120, // Width of the output
@@ -17,7 +20,7 @@ void appDebugLog(dynamic msg) {
   logger.d(msg);
 }
 
-void appInfoLog(dynamic msg) {
+void appSuccessLog(dynamic msg) {
   logger.i(msg);
 }
 
